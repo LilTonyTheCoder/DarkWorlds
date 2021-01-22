@@ -5,18 +5,31 @@
 
       <Nuxt />
 
+      <transition name="home">
+        <LeftMenu v-if="isOpen" />
+      </transition>
+
       <Chat />
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'DefaultLayout',
 
   components: {
     Header: () => import('@/components/sections/header'),
+    LeftMenu: () => import('@/components/sections/leftMenu'),
     Chat: () => import('@/components/sections/chat'),
+  },
+
+  computed: {
+    ...mapState({
+      isOpen: state => state.leftMenu.isOpen,
+    }),
   },
 }
 </script>
@@ -66,4 +79,6 @@ html, body {
   }
 }
 
+.home-enter-active, .home-leave-active { transition: opacity .5s; }
+.home-enter, .home-leave-active { opacity: 0; }
 </style>

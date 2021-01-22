@@ -15,7 +15,10 @@
           @click="expandStuff(index)"
         >
           <div class="item__img">
-            <img src="/images/items/3.gif" alt="">
+            <img
+              :src="`/images/loot/${item.img}`"
+              alt=""
+            >
           </div>
 
           <div class="item__info info">
@@ -24,10 +27,18 @@
             </div>
 
             <div class="info__other">
-              <span> {{item.description}} </span>
-              <span> Масса: {{item.weight}} </span>
+              <span> {{ item.description }} </span>
+              <span> Масса: {{ item.weight }} </span>
             </div>
 
+            <div class="info__controller">
+              <el-button
+                class="info__button"
+                @click.stop.prevent="grabItem(index)"
+              >
+                Подобрать
+              </el-button>
+            </div>
           </div>
         </div>
       </el-collapse-item>
@@ -36,8 +47,34 @@
         title="Монстры"
         name="2"
       >
-        <div>Operation feedback: enable the users to clearly perceive their operations by style updates and interactive effects;</div>
-        <div>Visual feedback: reflect current state by updating or rearranging elements of the page.</div>
+        <div
+          v-for="(monster, index) in monsters"
+          :key="index"
+          class="stuff__monster monster"
+        >
+          <div class="monster__img">
+            <img
+              :src="`/images/loot/${monster.img}`"
+              alt=""
+            >
+          </div>
+
+          <div class="monster__info info">
+            <div class="info__name">
+              {{ monster.name }} [{{ monster.lvl }}]
+            </div>
+            <div class="info__other">
+              <span>HP: {{ monster.hp }}</span>
+              <span>Урон: {{ monster.min_damage }} - {{ monster.max_damage }}</span>
+            </div>
+          </div>
+
+          <div class="monster__attack">
+            <el-button>
+              <i class="el-icon-ice-cream-round" />
+            </el-button>
+          </div>
+        </div>
       </el-collapse-item>
     </el-collapse>
   </div>
@@ -49,15 +86,35 @@ export default {
 
   data() {
     return {
-      activeNames: ['1'],
+      activeNames: [],
 
       fallenItems: [
-        { id: '9b4eea689', name: "Змеиная шкура", description: "Некоторые верят, что змеиные шкурки обладают скрытой магической силой.", weight: 1, img: 'snake-skin.png' },
-        { id: '844d0bcee', name: "Увесистая дубина", description: "Тяжелая неудобная дубина. Не пригодна для использования людьми, а жаль.", weight: 6, img: 'big-club.png' },
-        { id: '68bb8608d', name: "Хитин", description: "Тяжелая неудобная дубина. Не пригодна для использования людьми, а жаль.", weight: 6, img: 'big-club.png' },
+        { id: '9b4eea689', name: "Змеиная шкура", description: "Некоторые верят, что змеиные шкурки обладают скрытой магической силой.", weight: 1, img: 'snake_skin.png' },
+        { id: '844d0bcee', name: "Увесистая дубина", description: "Тяжелая неудобная дубина. Не пригодна для использования людьми, а жаль.", weight: 6, img: 'wolf_tail.png' },
+        { id: '68bb8608d', name: "Хитин", description: "Тяжелая неудобная дубина. Не пригодна для использования людьми, а жаль.", weight: 6, img: 'wooden_log.png' },
       ],
 
-      expandedStuff: [0],
+      expandedStuff: [],
+
+      monsters: [
+        {
+          img: 'snake_skin.png',
+          name: 'Лесная змея',
+          lvl: 18,
+          hp: 221,
+          min_damage: 46,
+          max_damage: 55,
+        },
+
+        {
+          img: 'snake_skin.png',
+          name: 'Лесная змея',
+          lvl: 18,
+          hp: 221,
+          min_damage: 46,
+          max_damage: 55,
+        },
+      ],
     }
   },
 
@@ -70,6 +127,10 @@ export default {
       } else {
         this.expandedStuff.push(index)
       }
+    },
+
+    grabItem(index) {
+      console.log(index)
     },
   },
 }
@@ -107,10 +168,15 @@ export default {
           height: 70px;
         }
 
-        .info .info__other {
+        .info .info__other,
+        .info .info__controller {
           width: auto;
           height: auto;
           opacity: 1;
+
+          button {
+            display: block;
+          }
         }
       }
 
@@ -121,9 +187,16 @@ export default {
         height: 0;
 
         transition: .3s;
+
+        img {
+          max-width: 100%;
+          max-height: 100%;
+        }
       }
 
       .info {
+        width: calc(100% - 70px);
+
         &__other {
           width: 0;
           height: 0;
@@ -137,6 +210,69 @@ export default {
             display: block;
           }
         }
+
+        &__controller {
+          width: 0;
+          height: 0;
+          opacity: 0;
+          text-align: right;
+
+          button {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .monster {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      padding-left: 5%;
+      padding-right: 5%;
+
+      & + .monster {
+        // border-top: 1px solid #EBEEF5;
+      }
+
+      &__img {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        border: 1px solid #dcdfe6;
+        overflow: hidden;
+        margin-right: 3%;
+
+        img {
+          max-width: 100%;
+          max-height: 100%;
+        }
+      }
+
+      .info {
+        flex-grow: 1;
+
+        &__name {
+          font-size: 14px;
+          color: #000;
+          font-weight: bold;
+        }
+
+        &__other {
+          font-size: 14px;
+          color: #606266;
+          display: flex;
+
+          span + span {
+            margin-left: 8%;
+          }
+        }
+      }
+
+      &__attack button {
+        font-size: 38px;
+        border: 0;
+        padding-right: 0;
       }
     }
   }

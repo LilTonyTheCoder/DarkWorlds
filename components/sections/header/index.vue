@@ -2,7 +2,9 @@
   <div class="app-header">
     <div class="app-header__line app-header__line--with-title">
       <span class="app-header__top-icon">
-        <el-button>
+        <el-button
+          @click="toggleLeftMenu"
+        >
           <i class="el-icon-s-unfold" />
         </el-button>
 
@@ -51,8 +53,16 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'HeaderCompo',
+
+  methods: {
+    ...mapMutations({
+      toggleLeftMenu: 'leftMenu/TOGGLE_LEFT_MENU',
+    }),
+  },
 }
 </script>
 
