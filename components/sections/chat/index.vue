@@ -25,5 +25,8 @@ export default {
   flex-direction: column;
   justify-content: flex-end;
   z-index: -1;
+
+  font-size: 14px;
+  padding: 0 1%;
 }
 </style>

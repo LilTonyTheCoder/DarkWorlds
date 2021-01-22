@@ -59,13 +59,13 @@ export default {
 <style lang="scss">
 .app-header {
   width: 100%;
-  padding: 8px 3% 8px;
-  font-size: 32px;
+  padding: 0px 0% 4px;
+  font-size: 18px;
   background: #fff;
 
   &__line {
     width: 100%;
-    margin-bottom: 24px;
+    // margin-bottom: 24px;
 
     &:last-child {
       margin-bottom: 0;
@@ -75,22 +75,33 @@ export default {
 
       .el-button {
         border: 0;
-        font-size: 32px;
+        font-size: 20px;
       }
     }
 
     &--buttons {
       display: flex;
       justify-content: space-between;
+      padding-left: 3%;
+      padding-right: 3%;
 
       .el-button {
-        width: 31%;
-        font-size: 32px;
+        width: 32.5%;
+        font-size: 20px;
+        padding: 0px 13px;
+        line-height: 6px;
+        height: 40px;
+      }
+
+      .el-button+.el-button {
+        margin-left: 0px;
       }
 
       &__button-inner {
         display: flex;
         color: #000;
+        align-items: center;
+        // justify-content: flex-start;
       }
 
       &__info {
@@ -99,19 +110,16 @@ export default {
         text-align: left;
 
         .current {
-          font-size: 20px;
+          font-size: 10px;
           font-weight: normal;
         }
 
         .max {
           color: #606266;
+          font-size: 10px;
         }
       }
     }
-  }
-
-  &__top-icon {
-    margin-right: 3%;
   }
 }
 </style>
