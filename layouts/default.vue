@@ -79,6 +79,25 @@ html, body {
   }
 }
 
-.home-enter-active, .home-leave-active { transition: opacity .5s; }
-.home-enter, .home-leave-active { opacity: 0; }
+.home-enter-active,
+.home-leave-active {
+  transition: opacity .5s;
+
+  .left-menu__inner, .left-menu__shadow {
+    transition: .3s;
+  }
+}
+
+.home-enter,
+.home-leave-active {
+  opacity: 0.99;
+
+  .left-menu__inner {
+    transform: translateX(-100%);
+  }
+
+  .left-menu__shadow {
+    opacity: 0;
+  }
+}
 </style>

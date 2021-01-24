@@ -149,6 +149,10 @@ export default {
       color: #606266;
     }
 
+    .el-collapse-item__content {
+      padding-bottom: 0;
+    }
+
     .item {
       display: flex;
       align-items: center;
