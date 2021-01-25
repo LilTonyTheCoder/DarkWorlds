@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'HomePage',
 
@@ -27,41 +29,44 @@ export default {
     BottomExpanders: () => import('./-bottomExpanders'),
     RoutesMainPage: () => import('./-routesMainPage'),
   },
+
+  created() {
+    this.changeHeaderAction('openLeftMenu')
+    this.changeHeaderTitle('CircleOfLife')
+    this.changeHeaderBottom('default')
+  },
+
+  methods: {
+    ...mapMutations({
+      changeHeaderAction: 'header/CHANGE_MAIN_BUTTON_ACTION',
+      changeHeaderTitle: 'header/CHANGE_TITLE',
+      changeHeaderBottom: 'header/CHANGE_BOTTOM_SECTION',
+    }),
+  },
 }
 </script>
 
 <style lang="scss">
-  .main-page {
-    background: #fff;
-    position: relative;
-    height: 76%;
-    overflow-y: scroll;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-    box-sizing: border-box;
+.main-page {
+  &__wrapper {
+    .info {
+      margin-bottom: 20px;
 
-    &__wrapper {
-      padding-top: 6px;
-      padding-left: 3%;
-      padding-right: 3%;
+      .el-card__body {
+        padding: 12px 14px;
+      }
 
-      .info {
-        margin-bottom: 20px;
+      &__title {
+        font-size: 14px;
+        margin-bottom: 8px;
+        font-weight: bold;
+      }
 
-        .el-card__body {
-          padding: 12px 14px;
-        }
-
-        &__title {
-          font-size: 14px;
-          margin-bottom: 8px;
-          font-weight: bold;
-        }
-
-        &__text {
-          font-size: 12px;
-          color: #909399;
-        }
+      &__text {
+        font-size: 12px;
+        color: #909399;
       }
     }
   }
+}
 </style>

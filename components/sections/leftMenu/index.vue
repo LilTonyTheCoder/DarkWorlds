@@ -16,11 +16,11 @@
 
         <div class="row--info__text">
           <div class="row--info__name">
-            Антопус
+            {{ userName }}
           </div>
 
           <div class="row--info__lvl">
-            Воин 24 уровня
+            {{ userClass }} {{ userLvl }} уровня
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
   name: 'LeftMenu',
@@ -81,6 +81,14 @@ export default {
         { title: 'История сражений', icon: 'folder', href: '#' },
       ],
     }
+  },
+
+  computed: {
+    ...mapState({
+      userName: state => state.user.name,
+      userLvl: state => state.user.lvl,
+      userClass: state => state.user.class,
+    }),
   },
 
   methods: {

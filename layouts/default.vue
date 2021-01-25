@@ -5,7 +5,7 @@
 
       <Nuxt />
 
-      <transition name="home">
+      <transition name="slideRight">
         <LeftMenu v-if="isOpen" />
       </transition>
 
@@ -79,8 +79,8 @@ html, body {
   }
 }
 
-.home-enter-active,
-.home-leave-active {
+.slideRight-enter-active,
+.slideRight-leave-active {
   transition: opacity .5s;
 
   .left-menu__inner, .left-menu__shadow {
@@ -88,8 +88,8 @@ html, body {
   }
 }
 
-.home-enter,
-.home-leave-active {
+.slideRight-enter,
+.slideRight-leave-active {
   opacity: 0.99;
 
   .left-menu__inner {
