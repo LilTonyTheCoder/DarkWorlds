@@ -30,6 +30,7 @@
           v-for="(item, index) in topLinks"
           :key="index"
           class="inner__row row"
+          @click="itemHandler(item.href)"
         >
           <div class="row__icon">
             <i :class="`el-icon-${item.icon}`" />
@@ -69,10 +70,11 @@ export default {
   data() {
     return {
       topLinks: [
-        { title: 'Персонаж', icon: 'user', href: '#' },
-        { title: 'Умения', icon: 'reading', href: '#' },
-        { title: 'Сумка', icon: 'folder', href: '#' },
+        { title: 'Персонаж', icon: 'user', href: '/personage' },
+        { title: 'Умения', icon: 'reading', href: '/personage/skills' },
+        { title: 'Сумка', icon: 'folder', href: '/personage/bag' },
       ],
+
       middleLinks: [
         { title: 'Локация', icon: 'user', href: '#' },
         { title: 'Задания', icon: 'reading', href: '#' },
@@ -95,6 +97,11 @@ export default {
     ...mapMutations({
       toggleLeftMenu: 'leftMenu/TOGGLE_LEFT_MENU',
     }),
+
+    itemHandler(href) {
+      this.$router.push(href)
+      this.toggleLeftMenu()
+    },
   },
 }
 </script>
@@ -131,7 +138,7 @@ export default {
     padding-top: 4px;
 
     &__top-links, &__middle-links {
-      border-bottom: 1px solid #EBEEF5;
+      border-bottom: 1px solid $lighter-border;
     }
 
     .row {
@@ -140,6 +147,7 @@ export default {
       padding-right: 5%;
       display: flex;
       align-items: center;
+      cursor: pointer;
 
       &:first-child {
         margin-top: 8px;
@@ -175,7 +183,7 @@ export default {
         }
 
         &__lvl {
-          color: #909399;
+          color: $secondary-text;
           font-size: 14px;
         }
       }

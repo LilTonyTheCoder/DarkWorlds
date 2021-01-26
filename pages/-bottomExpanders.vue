@@ -146,7 +146,7 @@ export default {
       padding-right: 5%;
       height: 60px;
       font-size: 14px;
-      color: #606266;
+      color: $regular-text;
     }
 
     .el-collapse-item__content {
@@ -156,7 +156,7 @@ export default {
     .item {
       display: flex;
       align-items: center;
-      color: #000;
+      color: $black-color;
       display: flex;
       transition: .3s;
 
@@ -207,7 +207,7 @@ export default {
           opacity: 0;
 
           font-size: 12px;
-          color: #909399;
+          color: $secondary-text;
           transition: .3s;
 
           span {
@@ -236,14 +236,14 @@ export default {
       padding-right: 5%;
 
       & + .monster {
-        // border-top: 1px solid #EBEEF5;
+        // border-top: 1px solid $lighter-border;
       }
 
       &__img {
         width: 50px;
         height: 50px;
         border-radius: 100%;
-        border: 1px solid #dcdfe6;
+        border: 1px solid $base-border;
         overflow: hidden;
         margin-right: 3%;
 
@@ -258,13 +258,13 @@ export default {
 
         &__name {
           font-size: 14px;
-          color: #000;
+          color: $black-color;
           font-weight: bold;
         }
 
         &__other {
           font-size: 14px;
-          color: #606266;
+          color:$regular-text;
           display: flex;
 
           span + span {

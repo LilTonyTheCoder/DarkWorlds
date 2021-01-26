@@ -62,7 +62,6 @@ html, body {
   margin: 0;
 }
 .mobile-container {
-  // background: red;
   width: 100vw;
   height: 100vh;
   max-height: 100vh;

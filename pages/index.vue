@@ -64,7 +64,7 @@ export default {
 
       &__text {
         font-size: 12px;
-        color: #909399;
+        color: $secondary-text;
       }
     }
   }

@@ -22,7 +22,7 @@ export default {
       src: '@/assets/css/index.scss',
       lang: 'scss',
       rel: 'preload',
-    },
+    }
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -41,8 +41,16 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    ['nuxt-sass-resources-loader', '@/assets/css/index.scss'],
+    [
+      '@nuxtjs/style-resources',
+      'nuxt-sass-resources-loader',
+      '@/assets/css/index.scss'
+    ],
   ],
+
+  styleResources: {
+    scss: ['assets/css/variables.scss'],
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {

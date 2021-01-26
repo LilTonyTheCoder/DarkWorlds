@@ -53,7 +53,7 @@ export default {
 .main-page {
   .routes {
     padding-bottom: 12px;
-    // border-bottom: 1px solid #dcdfe6;
+    // border-bottom: 1px solid $base-border;
 
     &__title {
       width: 100%;
@@ -79,7 +79,7 @@ export default {
       justify-content: space-between;
       padding: 0 5%;
       font-size: 14px;
-      color: #606266;
+      color: $regular-text;
     }
 
     .line {
@@ -94,7 +94,7 @@ export default {
         align-items: center;
         justify-content: space-between;
         font-size: 14px;
-        color: #000;
+        color: $black-color;
       }
 
       &__progress-wrapper {

@@ -28,49 +28,8 @@
       </div>
     </div>
 
-    <div
-      v-if="headerBottom === 'default'"
-      class="app-header__line app-header__line--buttons"
-    >
-      <el-button round>
-        <NuxtLink to="/personage">
-          <div class="app-header__line--buttons__button-inner">
-            <i class="el-icon-user" />
-            <span class="app-header__line--buttons__info">
-              <span class="current">396</span>
-              <br>
-              <span class="max">396</span>
-            </span>
-          </div>
-        </NuxtLink>
-      </el-button>
-
-      <el-button round>
-        <NuxtLink to="/personage/skills">
-          <div class="app-header__line--buttons__button-inner">
-            <i class="el-icon-sugar" />
-            <span class="app-header__line--buttons__info">
-              <span class="current">57</span>
-              <br>
-              <span class="max">57</span>
-            </span>
-          </div>
-        </NuxtLink>
-      </el-button>
-
-      <el-button round>
-        <NuxtLink to="/personage/bag">
-          <div class="app-header__line--buttons__button-inner">
-            <i class="el-icon-coin" />
-            <span class="app-header__line--buttons__info">
-              <span class="current">28</span>
-              <br>
-              <span class="max">107</span>
-            </span>
-          </div>
-        </NuxtLink>
-      </el-button>
-    </div>
+    <DefaultHeaderBottom v-if="headerBottom === 'default'" />
+    <PersonageHeaderBottom v-if="headerBottom === 'personage'" />
   </div>
 </template>
 
@@ -79,6 +38,11 @@ import { mapMutations, mapState } from 'vuex'
 
 export default {
   name: 'HeaderCompo',
+
+  components: {
+    DefaultHeaderBottom: () => import('./defaultHeaderBottom.vue'),
+    PersonageHeaderBottom: () => import('./personageHeaderBottom.vue'),
+  },
 
   computed: {
     ...mapState({
@@ -159,12 +123,18 @@ export default {
       .el-button {
         width: 32.5%;
         font-size: 20px;
-        padding: 0px 13px;
-        line-height: 6px;
+        padding: 0;
         height: 40px;
 
         a {
           text-decoration: none;
+          padding: 0px 13px;
+          display: inline-block;
+          width: 100%;
+          height: 100%;
+          line-height: 6px;
+          display: flex;
+          align-items: center;
         }
       }
 
@@ -174,7 +144,7 @@ export default {
 
       &__button-inner {
         display: flex;
-        color: #000;
+        color: $black-color;
         align-items: center;
         // justify-content: flex-start;
       }
@@ -183,15 +153,34 @@ export default {
         font-size: 16px;
         margin-left: 8% !important;
         text-align: left;
+        line-height: 11px;
 
         .current {
-          font-size: 10px;
+          font-size: 12px;
           font-weight: normal;
         }
 
         .max {
-          color: #606266;
+          color: $regular-text;
           font-size: 10px;
+        }
+      }
+    }
+
+    &--personage-page {
+      padding: 0;
+      .el-button {
+        width: 33.333%;
+        border: none;
+        font-size: 12px;
+        text-transform: uppercase;
+        a {
+          justify-content: center;
+          color: $regular-text;
+
+          &.nuxt-link-exact-active {
+            color: $black-color;
+          }
         }
       }
     }
