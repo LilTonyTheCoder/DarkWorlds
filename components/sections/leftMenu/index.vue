@@ -16,11 +16,11 @@
 
         <div class="row--info__text">
           <div class="row--info__name">
-            {{ userName }}
+            {{ userCommon.name }}
           </div>
 
           <div class="row--info__lvl">
-            {{ userClass }} {{ userLvl }} уровня
+            {{ userCommon.class }} {{ userCommon.lvl }} уровня
           </div>
         </div>
       </div>
@@ -87,9 +87,7 @@ export default {
 
   computed: {
     ...mapState({
-      userName: state => state.user.name,
-      userLvl: state => state.user.lvl,
-      userClass: state => state.user.class,
+      userCommon: state => state.user.common,
     }),
   },
 

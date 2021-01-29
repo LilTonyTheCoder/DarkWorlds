@@ -10,13 +10,13 @@ export default {
 
   computed: {
     ...mapState({
-      userName: state => state.user.name,
+      userCommon: state => state.user.common,
     }),
   },
 
   created() {
     this.changeHeaderAction('goToMainPage')
-    this.changeHeaderTitle(this.userName)
+    this.changeHeaderTitle(this.userCommon.name)
     this.changeHeaderBottom('personage')
   },
 
