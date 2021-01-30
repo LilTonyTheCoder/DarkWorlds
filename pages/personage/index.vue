@@ -74,6 +74,9 @@
     </div>
 
     <div class="personage-page__info info">
+
+      {{ itemsTest }}
+
       <el-link type="warning">Снять все</el-link>
 
       <p>Уровень: {{ userCommon.lvl }}</p>
@@ -104,15 +107,49 @@
           </div>
         </div>
       </div>
+
+      <el-collapse v-model="activeNames">
+        <el-collapse-item
+          title="Параметры"
+          name="1"
+          class="info__params"
+        >
+          <div>
+            <div>Уровень жизни:</div>
+            <div>205</div>
+          </div>
+          <div>Уровень выносливости:</div>
+          <hr>
+          <div>Урон:</div>
+          <hr>
+          <div>Броня головы:</div>
+          <div>Броня корпуса:</div>
+          <div>Броня пояса:</div>
+          <div>Броня ног:</div>
+          <hr>
+          <div>Критический удар:</div>
+          <div>Против критич-го удара:</div>
+          <div>Увертывание:</div>
+          <div>Против Увертывания:</div>
+        </el-collapse-item>
+      </el-collapse>
     </div>
   </div>
 </template>
 
 <script>
 import { mapMutations, mapState } from 'vuex'
+// import { prototypes } from '~/backendInfo/items.js'
 
 export default {
   name: 'PersonagePage',
+
+  data() {
+    return {
+      itemsTest: 'prototypes',
+      activeNames: [],
+    }
+  },
 
   computed: {
     ...mapState({
@@ -205,6 +242,7 @@ export default {
     padding-left: 3%;
     padding-right: 3%;
     line-height: 24px;
+    font-size: 14px;
 
     p {
       font-size: 14px;
@@ -239,6 +277,15 @@ export default {
         button + button {
           margin-left: 4px;
         }
+      }
+    }
+
+    .el-collapse-item__content {
+      line-height: 34px;
+
+      div {
+        display: flex;
+        justify-content: space-between;
       }
     }
   }

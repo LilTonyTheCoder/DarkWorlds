@@ -8,6 +8,13 @@ export default () => ({
     needExp: 31300,
   },
 
+  inventory: [
+    '9d25fcc91',
+    'fd4671480',
+    '594f42d05',
+    'd3c092b2a',
+  ],
+
   stats: {
     str: {
       title: "Сила",
