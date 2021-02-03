@@ -3,7 +3,19 @@
     <div class="personage-page__wrapper">
       <div class="personage-page__inventory inventory inventory--left">
         <div class="inventory__item">
-          <img width="70px" src="images/items/default/char_helmet.gif" alt="">
+          <img
+            v-if="!userEquip.hemlet"
+            width="70px"
+            src="images/items/default/char_helmet.gif"
+            alt=""
+          >
+
+          <img
+            v-if="userEquip.hemlet"
+            width="70px"
+            :src="getItem(userEquip.hemlet).img"
+            alt=""
+          >
         </div>
         <div class="inventory__item inventory__item--double">
           <img src="images/items/default/char_weapon.gif" alt="">
@@ -75,95 +87,36 @@
 
     <div class="personage-page__info info">
 
-      {{ itemsTest }}
+      <PersonageStats />
 
-      <el-link type="warning">Снять все</el-link>
-
-      <p>Уровень: {{ userCommon.lvl }}</p>
-
-      <p>Опыт: {{ userCommon.exp }} ({{userCommon.needExp}})</p>
-
-      <br>
-
-      <el-tag type="info">{{ this.userStats.free.title }}: {{ this.userStats.free.num }}</el-tag>
-
-      <div
-        v-for="(stat, key) in filteredUserStats"
-        :key="key"
-        class="info__item item"
-      >
-        <div class="item__text">
-          {{ stat.title }}
-        </div>
-
-        <div class="item__right">
-          <div class="item__num">
-            <b>{{ stat.num }}</b>
-          </div>
-
-          <div class="item__controllers controllers">
-            <el-button size="mini" circle>+</el-button>
-            <el-button size="mini" circle>-</el-button>
-          </div>
-        </div>
-      </div>
-
-      <el-collapse v-model="activeNames">
-        <el-collapse-item
-          title="Параметры"
-          name="1"
-          class="info__params"
-        >
-          <div>
-            <div>Уровень жизни:</div>
-            <div>205</div>
-          </div>
-          <div>Уровень выносливости:</div>
-          <hr>
-          <div>Урон:</div>
-          <hr>
-          <div>Броня головы:</div>
-          <div>Броня корпуса:</div>
-          <div>Броня пояса:</div>
-          <div>Броня ног:</div>
-          <hr>
-          <div>Критический удар:</div>
-          <div>Против критич-го удара:</div>
-          <div>Увертывание:</div>
-          <div>Против Увертывания:</div>
-        </el-collapse-item>
-      </el-collapse>
+      <BottomParams />
     </div>
   </div>
 </template>
 
 <script>
 import { mapMutations, mapState } from 'vuex'
-// import { prototypes } from '~/backendInfo/items.js'
+import { getItemById } from '~/backendInfo/items.js'
 
 export default {
   name: 'PersonagePage',
 
+  components: {
+    BottomParams: () => import('./-bottomParams.vue'),
+    PersonageStats: () => import('./-personageStats.vue'),
+  },
+
   data() {
     return {
       itemsTest: 'prototypes',
-      activeNames: [],
     }
   },
 
   computed: {
     ...mapState({
       userCommon: state => state.user.common,
-      userStats: state => state.user.stats,
+      userEquip: state => state.user.equipped,
     }),
-
-    filteredUserStats() {
-      let copyObj = JSON.parse(JSON.stringify(this.userStats))
-
-      delete copyObj.free
-
-      return copyObj
-    },
   },
 
   created() {
@@ -178,6 +131,10 @@ export default {
       changeHeaderTitle: 'header/CHANGE_TITLE',
       changeHeaderBottom: 'header/CHANGE_BOTTOM_SECTION',
     }),
+
+    getItem(id) {
+      return getItemById(id)
+    },
   },
 }
 </script>
@@ -188,6 +145,7 @@ export default {
     display: flex;
     padding-top: 10px;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .inventory {
@@ -198,8 +156,21 @@ export default {
     align-items: center;
     justify-content: center;
 
+    &--left {
+      .inventory__item {
+        text-align: right;
+      }
+    }
+
+    &--right {
+      .inventory__item {
+        text-align: left;
+      }
+    }
+
     &--avatar {
       width: 40%;
+      max-width: 120px;
 
       img {
         max-width: 100%;
@@ -243,51 +214,6 @@ export default {
     padding-right: 3%;
     line-height: 24px;
     font-size: 14px;
-
-    p {
-      font-size: 14px;
-    }
-
-    .item {
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      &__right {
-        display: flex;
-      }
-
-      &__num {
-        width: 50px;
-      }
-
-      .controllers {
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
-        button {
-          width: 20px;
-          height: 20px;
-          padding: 0;
-        }
-
-        button + button {
-          margin-left: 4px;
-        }
-      }
-    }
-
-    .el-collapse-item__content {
-      line-height: 34px;
-
-      div {
-        display: flex;
-        justify-content: space-between;
-      }
-    }
   }
 }
 </style>

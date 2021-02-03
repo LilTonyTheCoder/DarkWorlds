@@ -15,6 +15,31 @@ export default () => ({
     'd3c092b2a',
   ],
 
+  equipped: {
+    sergi: null,
+    kulon: null,
+    perchi: null,
+    naruchi: null,
+    weap: null,
+    bron: null,
+    r1: null,
+    r2: null,
+    r3: null,
+    r4: null,
+    hemlet: null,
+    shit: null,
+    boots: null,
+    belt: null,
+
+    stone1: null,
+    stone2: null,
+    stone3: null,
+    stone4: null,
+    stone5: null,
+    stone6: null,
+    stone7: null,
+  },
+
   stats: {
     str: {
       title: "Сила",

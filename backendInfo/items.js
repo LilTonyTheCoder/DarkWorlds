@@ -1,6 +1,6 @@
 import helmet_1 from './helmets/1.js'
 
-export const shopItems = {
+export const usersItems = {
   '9d25fcc91': { prototype: 1000, durability: 24 },
   'fd4671480': { prototype: 1001, durability: 24 },
   '594f42d05': { prototype: 1002, durability: 10 },
@@ -9,4 +9,11 @@ export const shopItems = {
 
 export const prototypes = {
   ...helmet_1,
+}
+
+export const getItemById = (id) => {
+  return {
+    ...usersItems[id],
+    ...prototypes[usersItems[id].prototype],
+  }
 }
