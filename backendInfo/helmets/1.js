@@ -70,7 +70,7 @@ export default {
     },
 
     props: {
-      health: 5,
+      hp: 5,
       crit: 1,
       a_dex: 2,
       armor_h: 2,

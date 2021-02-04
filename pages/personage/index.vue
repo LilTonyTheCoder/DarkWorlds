@@ -1,20 +1,22 @@
 <template>
   <div class="main-page personage-page">
     <div class="personage-page__wrapper">
+      <!-- {{ allUserItemsExpanded }} -->
       <div class="personage-page__inventory inventory inventory--left">
-        <div class="inventory__item">
+        <div
+          class="inventory__item inventory__item--helmet"
+          @click="showItemsToWear('helmet')"
+        >
           <img
-            v-if="!userEquip.hemlet"
-            width="70px"
+            v-if="!userEquip.helmet"
             src="images/items/default/char_helmet.gif"
-            alt=""
+            alt="helmet"
           >
 
           <img
-            v-if="userEquip.hemlet"
-            width="70px"
-            :src="getItem(userEquip.hemlet).img"
-            alt=""
+            v-if="userEquip.helmet"
+            :src="getItem(userEquip.helmet).img"
+            alt="helmet"
           >
         </div>
         <div class="inventory__item inventory__item--double">
@@ -23,8 +25,10 @@
         <div class="inventory__item inventory__item--triple">
           <img src="images/items/default/char_armor.gif" alt="">
         </div>
-        <div class="inventory__item">
+        <div class="inventory__item inventory__item--ring inventory__item--ring--grow">
           <img src="images/items/default/char_ring.gif" alt="">
+        </div>
+        <div class="inventory__item inventory__item--ring">
           <img src="images/items/default/char_ring.gif" alt="">
         </div>
         <div class="inventory__item">
@@ -91,6 +95,21 @@
 
       <BottomParams />
     </div>
+
+    <el-dialog :title="dialogTitle" :visible.sync="dialogVisible">
+      <div
+        v-for="(item, index) in dialogInnerItems"
+        :key="index"
+      >
+        {{ item.info.title }}
+        <br>
+        {{ item }}
+        <br>
+        <button v-if="userEquip[item.type] === item.id">Снять</button>
+        <button v-else>Надеть</button>
+        <br><br>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -109,6 +128,18 @@ export default {
   data() {
     return {
       itemsTest: 'prototypes',
+      dialogVisible: false,
+      dialogTitle: 'title',
+      dialogInnerItems: [],
+
+      leftSideItems: [
+        { title: 'helmet', extraClasses: ['--helmet'] },
+        { title: 'weapon', extraClasses: ['--double'] },
+        { title: 'armor', extraClasses: ['--triple'] },
+        { title: 'r1', type: 'ring', extraClasses: ['--ring', '--ring--grow'] },
+        { title: 'r2', type: 'ring', extraClasses: ['--ring'] },
+        { title: 'belt' },
+      ],
     }
   },
 
@@ -116,7 +147,21 @@ export default {
     ...mapState({
       userCommon: state => state.user.common,
       userEquip: state => state.user.equipped,
+      userInventory: state => state.user.inventory,
     }),
+
+    allUserItemsExpanded() {
+      const arr = []
+
+      this.userInventory.forEach(id => {
+        arr.push({
+          id,
+          ...this.getItem(id),
+        })
+      })
+
+      return arr
+    },
   },
 
   created() {
@@ -135,6 +180,15 @@ export default {
     getItem(id) {
       return getItemById(id)
     },
+
+    showItemsToWear(type) {
+      this.dialogInnerItems = this.allUserItemsExpanded.filter(el => el.type === type)
+
+      console.log(this.dialogInnerItems)
+
+      this.dialogTitle = type
+      this.dialogVisible = true
+    },
   },
 }
 </script>
@@ -152,7 +206,8 @@ export default {
     width: 30%;
     // text-align: center;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 
@@ -196,6 +251,20 @@ export default {
         max-width: 100%;
         max-height: 100%;
         background: #dedede;
+      }
+
+      &--ring {
+        width: 35px;
+
+        &--grow {
+          flex-grow: 1;
+        }
+      }
+
+      &--helmet {
+        img {
+          width: 70px;
+        }
       }
 
       &--double {
