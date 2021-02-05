@@ -4,35 +4,25 @@
       <!-- {{ allUserItemsExpanded }} -->
       <div class="personage-page__inventory inventory inventory--left">
         <div
-          class="inventory__item inventory__item--helmet"
-          @click="showItemsToWear('helmet')"
+          v-for="(item, index) in leftSideItems"
+          :key="index"
+          :class="[
+            'inventory__item',
+            item.styleClass
+          ]"
+          @click="showItemsToWear(item.type || item.title, item.title)"
         >
           <img
-            v-if="!userEquip.helmet"
-            src="images/items/default/char_helmet.gif"
-            alt="helmet"
+            v-if="!userEquip[item.title]"
+            :src="`images/items/default/char_${item.type || item.title}.gif`"
+            :alt="item.type || item.title"
           >
 
           <img
-            v-if="userEquip.helmet"
-            :src="getItem(userEquip.helmet).img"
-            alt="helmet"
+            v-if="userEquip[item.title]"
+            :src="getItem(userEquip[item.title]).img"
+            :alt="item.type || item.title"
           >
-        </div>
-        <div class="inventory__item inventory__item--double">
-          <img src="images/items/default/char_weapon.gif" alt="">
-        </div>
-        <div class="inventory__item inventory__item--triple">
-          <img src="images/items/default/char_armor.gif" alt="">
-        </div>
-        <div class="inventory__item inventory__item--ring inventory__item--ring--grow">
-          <img src="images/items/default/char_ring.gif" alt="">
-        </div>
-        <div class="inventory__item inventory__item--ring">
-          <img src="images/items/default/char_ring.gif" alt="">
-        </div>
-        <div class="inventory__item">
-          <img src="images/items/default/char_belt.gif" alt="">
         </div>
       </div>
 
@@ -54,27 +44,26 @@
       </div>
 
       <div class="personage-page__inventory inventory inventory--right">
-        <div class="inventory__item">
-          <img src="images/items/default/char_earring.gif" alt="">
-        </div>
-        <div class="inventory__item">
-          <img src="images/items/default/char_necklace.gif" alt="">
-        </div>
-        <div class="inventory__item">
-          <img src="images/items/default/char_bracelet.gif" alt="">
-        </div>
-        <div class="inventory__item">
-          <img src="images/items/default/char_gloves.gif" alt="">
-        </div>
-        <div class="inventory__item  inventory__item--double">
-          <img src="images/items/default/char_shield.gif" alt="">
-        </div>
-        <div class="inventory__item">
-          <img src="images/items/default/char_ring.gif" alt="">
-          <img src="images/items/default/char_ring.gif" alt="">
-        </div>
-        <div class="inventory__item">
-          <img width="70px" src="images/items/default/char_shoes.gif" alt="">
+        <div
+          v-for="(item, index) in rightSideItems"
+          :key="index"
+          :class="[
+            'inventory__item',
+            item.styleClass
+          ]"
+          @click="showItemsToWear(item.type || item.title, item.title)"
+        >
+          <img
+            v-if="!userEquip[item.title]"
+            :src="`images/items/default/char_${item.type || item.title}.gif`"
+            :alt="item.type || item.title"
+          >
+
+          <img
+            v-if="userEquip[item.title]"
+            :src="getItem(userEquip[item.title]).img"
+            :alt="item.type || item.title"
+          >
         </div>
       </div>
 
@@ -96,7 +85,7 @@
       <BottomParams />
     </div>
 
-    <el-dialog :title="dialogTitle" :visible.sync="dialogVisible">
+    <el-dialog :title="dialogTitle" top="2vh" custom-class="personage-page__dialog" :visible.sync="dialogVisible">
       <div
         v-for="(item, index) in dialogInnerItems"
         :key="index"
@@ -105,8 +94,14 @@
         <br>
         {{ item }}
         <br>
-        <button v-if="userEquip[item.type] === item.id">Снять</button>
-        <button v-else>Надеть</button>
+        <button
+          v-if="showUndressButton(item)"
+          @click="undressItem(item.type)"
+        >Снять</button>
+        <button
+          v-else
+          @click="dressItem({ type: item.type, id: item.id })"
+        >Надеть</button>
         <br><br>
       </div>
     </el-dialog>
@@ -132,13 +127,26 @@ export default {
       dialogTitle: 'title',
       dialogInnerItems: [],
 
+      currentActiveRing: null,
+
       leftSideItems: [
-        { title: 'helmet', extraClasses: ['--helmet'] },
-        { title: 'weapon', extraClasses: ['--double'] },
-        { title: 'armor', extraClasses: ['--triple'] },
-        { title: 'r1', type: 'ring', extraClasses: ['--ring', '--ring--grow'] },
-        { title: 'r2', type: 'ring', extraClasses: ['--ring'] },
+        { title: 'helmet', styleClass: 'inventory__item--helmet' },
+        { title: 'weapon', styleClass: 'inventory__item--double' },
+        { title: 'armor', styleClass: 'inventory__item--triple' },
+        { title: 'r1', type: 'ring', styleClass: 'inventory__item--ring inventory__item--ring--grow' },
+        { title: 'r2', type: 'ring', styleClass: 'inventory__item--ring' },
         { title: 'belt' },
+      ],
+
+      rightSideItems: [
+        { title: 'earring' },
+        { title: 'necklace' },
+        { title: 'bracelet' },
+        { title: 'gloves' },
+        { title: 'shield', styleClass: 'inventory__item--double' },
+        { title: 'r3', type: 'ring', styleClass: 'inventory__item--ring' },
+        { title: 'r4', type: 'ring', styleClass: 'inventory__item--ring inventory__item--ring--grow' },
+        { title: 'boot', styleClass: 'inventory__item--boots' },
       ],
     }
   },
@@ -175,19 +183,54 @@ export default {
       changeHeaderAction: 'header/CHANGE_MAIN_BUTTON_ACTION',
       changeHeaderTitle: 'header/CHANGE_TITLE',
       changeHeaderBottom: 'header/CHANGE_BOTTOM_SECTION',
+      userDress: 'user/DRESS_ITEM',
+      userUndress: 'user/UNDRESS_ITEM',
     }),
 
     getItem(id) {
       return getItemById(id)
     },
 
-    showItemsToWear(type) {
+    showItemsToWear(type, title) {
+      if (title) {
+        this.currentActiveRing = title
+      }
+
       this.dialogInnerItems = this.allUserItemsExpanded.filter(el => el.type === type)
 
       console.log(this.dialogInnerItems)
 
       this.dialogTitle = type
       this.dialogVisible = true
+    },
+
+    undressItem(type) {
+      if (type === 'ring') {
+        this.userUndress(this.currentActiveRing)
+      } else {
+        this.userUndress(type)
+      }
+    },
+
+    dressItem(item) {
+      if (item.type === 'ring') {
+        if ( this.userEquip.r1 === item.id ) this.userUndress('r1')
+        if ( this.userEquip.r2 === item.id ) this.userUndress('r2')
+        if ( this.userEquip.r3 === item.id ) this.userUndress('r3')
+        if ( this.userEquip.r4 === item.id ) this.userUndress('r4')
+
+        this.userDress({ type: this.currentActiveRing, id: item.id })
+      } else {
+        this.userDress({ type: item.type, id: item.id })
+      }
+    },
+
+    showUndressButton(item) {
+      if (item.type === 'ring') {
+        return this.userEquip[this.currentActiveRing] === item.id
+      } else {
+        return this.userEquip[item.type] === item.id
+      }
     },
   },
 }
@@ -261,7 +304,7 @@ export default {
         }
       }
 
-      &--helmet {
+      &--helmet, &--boots {
         img {
           width: 70px;
         }
@@ -283,6 +326,10 @@ export default {
     padding-right: 3%;
     line-height: 24px;
     font-size: 14px;
+  }
+
+  &__dialog {
+    width: 90%;
   }
 }
 </style>

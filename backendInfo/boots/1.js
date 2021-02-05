@@ -20,7 +20,7 @@ export default {
     props: {
       hp: 5,
       crit: 1,
-      a_dex: 2,
+      a_uvorot: 2,
       armor_b: 2,
     },
   },
@@ -72,7 +72,7 @@ export default {
     props: {
       hp: 3,
       a_crit: 1,
-      a_dex: 1,
+      a_uvorot: 1,
       armor_b: 5,
     },
   },
@@ -98,7 +98,7 @@ export default {
     props: {
       hp: 2,
       crit: 3,
-      dex: 3,
+      uvorot: 3,
       armor_b: 2,
     },
   },
@@ -124,7 +124,7 @@ export default {
     props: {
       hp: 5,
       a_crit: 1,
-      dex: 2,
+      uvorot: 2,
       armor_b: 3,
     },
   },
@@ -149,8 +149,8 @@ export default {
 
     props: {
       hp: 3,
-      dex: 3,
-      a_dex: 1,
+      uvorot: 3,
+      a_uvorot: 1,
       armor_b: 3,
     },
   },

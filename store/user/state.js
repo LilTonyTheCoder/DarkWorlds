@@ -11,9 +11,9 @@ export default () => ({
   inventory: [
     '9d25fcc91',
     'fd4671480',
-    '594f42d05',
-    'd3c092b2a',
-    '21ca4ac4a',
+    '4e296a910',
+    '83fd36c63',
+    '1dd1e64bd',
   ],
 
   equipped: {
@@ -30,7 +30,7 @@ export default () => ({
     r3: null,
     r4: null,
     shit: null,
-    boots: null,
+    boot: null,
     belt: null,
 
     stone1: null,
