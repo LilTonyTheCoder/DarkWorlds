@@ -187,6 +187,7 @@ export default {
 .personage-page {
   .inventory {
     width: 30%;
+    max-width: 75px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -221,6 +222,7 @@ export default {
 
     &--w100 {
       width: 100%;
+      max-width: 100%;
       flex-direction: row;
 
       img {
