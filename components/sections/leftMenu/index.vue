@@ -9,7 +9,7 @@
       <div class="inner__row row row--info">
         <div class="row--info__avatar">
           <img
-            :src="`/images/avatars/male/avatar1.jpg`"
+            :src="userCommon.avatar"
             alt=""
           >
         </div>

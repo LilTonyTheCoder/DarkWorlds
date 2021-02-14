@@ -6,11 +6,11 @@
 
       <p>Опыт: {{ userCommon.exp }} ({{userCommon.needExp}})</p>
 
-      <!-- <el-tag
+      <el-tag
         type="info"
       >
         {{ userStats.free.title }}: {{ userStats.free.num }}
-      </el-tag> -->
+      </el-tag>
 
       <br>
 
