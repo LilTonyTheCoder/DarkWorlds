@@ -3,7 +3,7 @@ export default () => ({
     name: 'Антоп',
     lvl: 17,
     class: 'Воин',
-    avatar: 'images/avatars/male/avatar1.jpg',
+    avatar: '/images/avatars/male/avatar1.jpg',
     exp: 27270,
     needExp: 31300,
   },
