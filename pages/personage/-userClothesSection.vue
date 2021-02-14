@@ -11,7 +11,7 @@
     >
       <img
         v-if="!userEquip[item.title]"
-        :src="`images/items/default/char_${item.type || item.title}.gif`"
+        :src="`/images/items/default/char_${item.type || item.title}.gif`"
         :alt="item.type || item.title"
       >
 
