@@ -8,18 +8,36 @@
 
       <div class="personage-page__inventory inventory inventory--avatar">
         <div class="inventory__item inventory__item--runes">
-          <img src="images/items/default/char_rune.gif" alt="">
-          <img src="images/items/default/char_rune.gif" alt="">
-          <img src="images/items/default/char_rune.gif" alt="">
+          <img
+            src="images/items/default/char_rune.gif"
+            alt=""
+          >
+          <img
+            src="images/items/default/char_rune.gif"
+            alt=""
+          >
+          <img
+            src="images/items/default/char_rune.gif"
+            alt=""
+          >
         </div>
         <img
           :src="userCommon.avatar"
           alt="user avatar"
         >
         <div class="inventory__item inventory__item--runes">
-          <img src="images/items/default/char_rune.gif" alt="">
-          <img src="images/items/default/char_rune.gif" alt="">
-          <img src="images/items/default/char_rune.gif" alt="">
+          <img
+            src="images/items/default/char_rune.gif"
+            alt=""
+          >
+          <img
+            src="images/items/default/char_rune.gif"
+            alt=""
+          >
+          <img
+            src="images/items/default/char_rune.gif"
+            alt=""
+          >
         </div>
       </div>
 
@@ -35,7 +53,6 @@
     </div>
 
     <div class="personage-page__info info">
-
       <PersonageStats />
 
       <BottomParams />
@@ -69,14 +86,14 @@ export default {
       ],
 
       rightSideItems: [
-        { title: 'earring' },
+        { title: 'earrings' },
         { title: 'necklace' },
-        { title: 'bracelet' },
+        { title: 'bracelets' },
         { title: 'gloves' },
         { title: 'shield', styleClass: 'inventory__item--double' },
         { title: 'r3', type: 'ring', styleClass: 'inventory__item--ring' },
         { title: 'r4', type: 'ring', styleClass: 'inventory__item--ring inventory__item--ring--grow' },
-        { title: 'boot', styleClass: 'inventory__item--boots' },
+        { title: 'boots', styleClass: 'inventory__item--boots' },
       ],
 
       stones: [

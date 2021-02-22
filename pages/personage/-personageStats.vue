@@ -1,46 +1,52 @@
 <template>
   <div>
-      <el-link type="warning">Снять все</el-link>
+    <el-link type="warning">
+      Снять все
+    </el-link>
 
-      <p>Уровень: {{ userCommon.lvl }}</p>
+    <p>Уровень: {{ userCommon.lvl }}</p>
 
-      <p>Опыт: {{ userCommon.exp }} ({{userCommon.needExp}})</p>
+    <p>Опыт: {{ userCommon.exp }} ({{ userCommon.needExp }})</p>
 
-      <el-tag
-        type="info"
-      >
-        {{ userStats.free.title }}: {{ userStats.free.num }}
-      </el-tag>
+    <el-tag
+      type="info"
+    >
+      {{ userStats.free.title }}: {{ userStats.free.num }}
+    </el-tag>
 
-      <br>
+    <br>
 
-      <div class="info__item item item--title">Характеристики</div>
+    <div class="info__item item item--title">
+      Характеристики
+    </div>
 
-      <div
-        v-for="(stat, key) in filteredUserStats"
-        :key="key"
-        class="info__item item"
-      >
-        <div class="item__text">
-          {{ stat.title }}
+    <div
+      v-for="(stat, key) in filteredUserStats"
+      :key="key"
+      class="info__item item"
+    >
+      <div class="item__text">
+        {{ stat.title }}
+      </div>
+
+      <div class="item__right">
+        <div class="item__num">
+          <b>{{ stat.num }}</b>
         </div>
 
-        <div class="item__right">
-          <div class="item__num">
-            <b>{{ stat.num }}</b>
-          </div>
-
-          <div class="item__controllers controllers">
-            <el-button
-              size="mini"
-              circle
-              :disabled="userStats.free.num < 1"
-              @click="increaseUserStat(key)"
-            >+</el-button>
-            <!-- <el-button size="mini" circle>-</el-button> -->
-          </div>
+        <div class="item__controllers controllers">
+          <el-button
+            size="mini"
+            circle
+            :disabled="userStats.free.num < 1"
+            @click="increaseUserStat(key)"
+          >
+            +
+          </el-button>
+          <!-- <el-button size="mini" circle>-</el-button> -->
         </div>
       </div>
+    </div>
   </div>
 </template>
 

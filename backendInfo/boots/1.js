@@ -1,6 +1,6 @@
 export default {
   2000: {
-    type: 'boot',
+    type: 'boots',
     img: '/images/items/boots/1/19.gif',
 
     info: {
@@ -26,7 +26,7 @@ export default {
   },
 
   2001: {
-    type: 'boot',
+    type: 'boots',
     img: '/images/items/boots/1/18.gif',
 
     info: {
@@ -52,7 +52,7 @@ export default {
   },
 
   2002: {
-    type: 'boot',
+    type: 'boots',
     img: '/images/items/boots/1/460.gif',
 
     info: {
@@ -78,7 +78,7 @@ export default {
   },
 
   2003: {
-    type: 'boot',
+    type: 'boots',
     img: '/images/items/boots/1/22.gif',
 
     info: {
@@ -104,7 +104,7 @@ export default {
   },
 
   2004: {
-    type: 'boot',
+    type: 'boots',
     img: '/images/items/boots/1/3.gif',
 
     info: {
@@ -130,7 +130,7 @@ export default {
   },
 
   2005: {
-    type: 'boot',
+    type: 'boots',
     img: '/images/items/boots/1/2.gif',
 
     info: {

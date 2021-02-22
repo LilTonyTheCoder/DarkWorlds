@@ -22,7 +22,12 @@
       >
     </div>
 
-    <el-dialog :title="dialogTitle" top="2vh" custom-class="personage-page__dialog" :visible.sync="dialogVisible">
+    <el-dialog
+      :title="dialogTitle"
+      top="2vh"
+      custom-class="personage-page__dialog"
+      :visible.sync="dialogVisible"
+    >
       <div
         v-for="(item, index) in dialogInnerItems"
         :key="index"
@@ -35,12 +40,16 @@
         <button
           v-if="showUndressButton(item.id)"
           @click="undressItem"
-        >Снять</button>
+        >
+          Снять
+        </button>
 
         <div v-else>
           <button
             @click="dressItem(item.id)"
-          > Надеть</button>
+          >
+            Надеть
+          </button>
 
           {{ dressTextToMultiType(item.id) }}
         </div>
@@ -65,6 +74,37 @@ export default {
     },
   },
 
+  data() {
+    return {
+      dialogVisible: false,
+      dialogTitle: 'title',
+
+      typeToNameMatch: { // TODO - в utils это
+        helmet: 'Шлем',
+        weapon: 'Оружие',
+        armor: 'Броня',
+
+        earrings: 'Серьги',
+        necklace: 'Ожерелье',
+        gloves: 'Перчатки',
+        bracelets: 'Наручи',
+        ring: 'Кольцо',
+        shield: 'Щит',
+        boots: 'Ботинки',
+        belt: 'Пояс',
+
+        stone: 'Камень',
+      },
+
+      dialogInnerItems: [],
+
+      currentActive: {
+        type: null,
+        title: null,
+      },
+    }
+  },
+
   computed: {
     allUserItemsExpanded() {
       const arr = []
@@ -87,37 +127,6 @@ export default {
       userEquip: state => state.user.equipped,
       userInventory: state => state.user.inventory,
     }),
-  },
-
-  data() {
-    return {
-      dialogVisible: false,
-      dialogTitle: 'title',
-
-      typeToNameMatch: { // TODO - в utils это
-        helmet: 'Шлем',
-        weapon: 'Оружие',
-        armor: 'Броня',
-
-        sergi: 'Серьги',
-        kulon: 'Ожерелье',
-        perchi: 'Перчатки',
-        naruchi: 'Наручи',
-        ring: 'Кольцо',
-        shit: 'Щит',
-        boot: 'Ботинки',
-        belt: 'Пояс',
-
-        stone: 'Камень',
-      },
-
-      dialogInnerItems: [],
-
-      currentActive: {
-        type: null,
-        title: null,
-      },
-    }
   },
 
   methods: {

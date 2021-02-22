@@ -16,7 +16,14 @@ export default () => ({
     '1dd1e64bd',
 
     '549fd6c44',
-    '765fc2410',
+
+    '718927374',
+    '9a8f46c04',
+    '30fa7d31b',
+    'da633c992',
+    '3f3605816',
+    'cd8c2814a',
+    '649aaf74f',
   ],
 
   equipped: {
@@ -24,16 +31,16 @@ export default () => ({
     weapon: null,
     armor: null,
 
-    sergi: null,
-    kulon: null,
-    perchi: null,
-    naruchi: null,
+    earrings: null,
+    necklace: null,
+    gloves: null,
+    bracelets: null,
     r1: null,
     r2: null,
     r3: null,
     r4: null,
-    shit: null,
-    boot: null,
+    shield: null,
+    boots: null,
     belt: null,
 
     stone1: null,

@@ -22,7 +22,7 @@ export default {
       src: '@/assets/css/index.scss',
       lang: 'scss',
       rel: 'preload',
-    }
+    },
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -44,7 +44,7 @@ export default {
     [
       '@nuxtjs/style-resources',
       'nuxt-sass-resources-loader',
-      '@/assets/css/index.scss'
+      '@/assets/css/index.scss',
     ],
   ],
 
