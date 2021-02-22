@@ -13,4 +13,8 @@ export default {
   UNDRESS_ITEM(state, itemType) {
     state.equipped[itemType] = null
   },
+
+  PUT_ON_AVATAR(state, payload) {
+    state.common.avatar = payload
+  },
 }

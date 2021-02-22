@@ -270,10 +270,6 @@ export default {
         }
       }
 
-      &--runes {
-        max-width: 100%;
-      }
-
       &--helmet, &--boots {
         img {
           width: 70px;
@@ -287,6 +283,10 @@ export default {
       &--triple {
         height: 105px;
       }
+    }
+
+    &__runes {
+      display: flex;
     }
   }
 }

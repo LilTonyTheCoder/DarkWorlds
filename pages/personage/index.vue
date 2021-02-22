@@ -7,38 +7,17 @@
       />
 
       <div class="personage-page__inventory inventory inventory--avatar">
-        <div class="inventory__item inventory__item--runes">
-          <img
-            src="images/items/default/char_rune.gif"
-            alt=""
-          >
-          <img
-            src="images/items/default/char_rune.gif"
-            alt=""
-          >
-          <img
-            src="images/items/default/char_rune.gif"
-            alt=""
-          >
-        </div>
-        <img
-          :src="userCommon.avatar"
-          alt="user avatar"
-        >
-        <div class="inventory__item inventory__item--runes">
-          <img
-            src="images/items/default/char_rune.gif"
-            alt=""
-          >
-          <img
-            src="images/items/default/char_rune.gif"
-            alt=""
-          >
-          <img
-            src="images/items/default/char_rune.gif"
-            alt=""
-          >
-        </div>
+        <UserClothesSection
+          class="inventory__runes"
+          :clothes="runesTop"
+        />
+
+        <UserAvatarSection />
+
+        <UserClothesSection
+          class="inventory__runes"
+          :clothes="runesBottom"
+        />
       </div>
 
       <UserClothesSection
@@ -70,6 +49,7 @@ export default {
     BottomParams: () => import('./-bottomParams.vue'),
     PersonageStats: () => import('./-personageStats.vue'),
     UserClothesSection: () => import('./-userClothesSection.vue'),
+    UserAvatarSection: () => import('./-userAvatarSection.vue'),
   },
 
   data() {
@@ -105,12 +85,25 @@ export default {
         { title: 'stone6', type: 'stone' },
         { title: 'stone7', type: 'stone' },
       ],
+
+      runesTop: [
+        { title: 'rune1', type: 'rune' },
+        { title: 'rune2', type: 'rune' },
+        { title: 'rune3', type: 'rune' },
+      ],
+
+      runesBottom: [
+        { title: 'rune4', type: 'rune' },
+        { title: 'rune5', type: 'rune' },
+        { title: 'rune6', type: 'rune' },
+      ],
     }
   },
 
   computed: {
     ...mapState({
       userCommon: state => state.user.common,
+      userSettings: state => state.user.settings,
     }),
   },
 
@@ -149,6 +142,7 @@ export default {
 
   &__dialog {
     width: 90%;
+    line-height: 16px;
   }
 }
 </style>

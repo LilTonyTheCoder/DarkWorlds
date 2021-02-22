@@ -10,6 +10,7 @@ import gloves_2 from './gloves/2.js' // 9000 - 9005
 import shield_1 from './shields/1.js' // 10000 - 10005
 import dubina_1 from './weapon/dubina/1.js' // 11000 - 11002
 import bracelets_1 from './bracelets/1.js' // 12000 - 12004
+import runes_basic from './runes/basic.js' // 13000 - 13002
 
 export const usersItems = {
   '9d25fcc91': { prototype: 1000, durability: 24 },
@@ -26,6 +27,7 @@ export const usersItems = {
   '3f3605816': { prototype: 10000, durability: 9 },
   'cd8c2814a': { prototype: 11000, durability: 9 },
   '649aaf74f': { prototype: 12000, durability: 9 },
+  '48e7afd73': { prototype: 13000, durability: 9 },
 
 }
 
@@ -35,6 +37,7 @@ export const prototypes = {
   ...belts_1,
   ...rings_1,
   ...stones_regular,
+  ...runes_basic,
   ...armor_1,
   ...shield_1,
   ...bracelets_1,

@@ -3,7 +3,7 @@ export default () => ({
     name: 'Антоп',
     lvl: 17,
     class: 'Воин',
-    avatar: '/images/avatars/male/avatar1.jpg',
+    avatar: '/images/avatars/male/common/0_0_M014.jpg',
     exp: 27270,
     needExp: 31300,
   },
@@ -14,9 +14,7 @@ export default () => ({
     '4e296a910',
     '83fd36c63',
     '1dd1e64bd',
-
     '549fd6c44',
-
     '718927374',
     '9a8f46c04',
     '30fa7d31b',
@@ -24,6 +22,7 @@ export default () => ({
     '3f3605816',
     'cd8c2814a',
     '649aaf74f',
+    '48e7afd73',
   ],
 
   equipped: {
@@ -50,6 +49,13 @@ export default () => ({
     stone5: null,
     stone6: null,
     stone7: null,
+
+    rune1: null,
+    rune2: null,
+    rune3: null,
+    rune4: null,
+    rune5: null,
+    rune6: null,
   },
 
   stats: {
@@ -77,5 +83,27 @@ export default () => ({
       title: "Свободных статов",
       num: 2,
     },
+  },
+
+  settings: {
+    gender: 'male', // male / female
+    availableAvatars: [
+      '0_0_M000.jpg',
+      '0_0_M001.jpg',
+      '0_0_M002.jpg',
+      '0_0_M003.jpg',
+      '0_0_M004.jpg',
+      '0_0_M005.jpg',
+      '0_0_M006.jpg',
+      '0_0_M007.jpg',
+      '0_0_M008.jpg',
+      '0_0_M009.jpg',
+      '0_0_M010.jpg',
+      '0_0_M011.jpg',
+      '0_0_M012.jpg',
+      '0_0_M013.jpg',
+      '0_0_M014.jpg',
+      '0_0_M015.jpg',
+    ],
   },
 })
