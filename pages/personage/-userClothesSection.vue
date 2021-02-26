@@ -2,7 +2,7 @@
   <div>
     <div
       v-for="(item, index) in clothes"
-      :key="index"
+      :key="`clothes ${index}`"
       :class="[
         'inventory__item',
         item.styleClass
@@ -25,47 +25,30 @@
     <el-dialog
       :title="dialogTitle"
       top="2vh"
-      custom-class="personage-page__dialog"
+      custom-class="personage-page__dialog dialog"
       :visible.sync="dialogVisible"
     >
-      <div
+      <BlockClothesItem
         v-for="(item, index) in dialogInnerItems"
-        :key="index"
-      >
-        {{ item.info.title }}
-        <br>
-        {{ item }}
-        <br>
-
-        <button
-          v-if="showUndressButton(item.id)"
-          @click="undressItem"
-        >
-          Снять
-        </button>
-
-        <div v-else>
-          <button
-            @click="dressItem(item.id)"
-          >
-            Надеть
-          </button>
-
-          {{ dressTextToMultiType(item.id) }}
-        </div>
-
-        <br><br>
-      </div>
+        :key="`dialog item ${index}`"
+        :item="item"
+        :current-active-title="currentActive.title"
+        @close="closeDialog"
+      />
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex'
+import { mapState } from 'vuex'
 import { getItemById } from '~/backendInfo/items.js'
 
 export default {
   name: 'UserClothesSection',
+
+  components: {
+    BlockClothesItem: () => import('@/components/blocks/clothes-item'),
+  },
 
   props: {
     clothes: {
@@ -94,6 +77,7 @@ export default {
         belt: 'Пояс',
 
         stone: 'Камень',
+        rune: 'Руна',
       },
 
       dialogInnerItems: [],
@@ -136,7 +120,14 @@ export default {
 
       this.dialogInnerItems = this.allUserItemsExpanded.filter(el => el.type === type)
 
-      console.log(this.dialogInnerItems)
+      this.dialogInnerItems = this.dialogInnerItems.map((item) => {
+        const equippedIn = (this.userEquip[this.currentActive.title] === item.id) ? this.currentActive.title : null
+
+        return {
+          ...item,
+          equippedIn,
+        }
+      })
 
       this.dialogTitle = this.typeToNameMatch[type]
       this.dialogVisible = true
@@ -144,32 +135,6 @@ export default {
 
     getItem(id) {
       return getItemById(id)
-    },
-
-    undressItem() {
-      this.userUndress(this.currentActive.title)
-    },
-
-    dressItem(itemId) {
-      if (this.isMultiType) {
-        Object.keys(this.userEquip).forEach((objKey) => {
-          if (this.userEquip[objKey] === itemId) {
-            this.userUndress(objKey)
-          }
-        })
-
-        this.userDress({ type: this.currentActive.title, id: itemId })
-      } else {
-        this.userDress({ type: this.currentActive.type, id: itemId })
-      }
-    },
-
-    showUndressButton(itemId) {
-      if (this.isMultiType) {
-        return this.userEquip[this.currentActive.title] === itemId
-      } else {
-        return this.userEquip[this.currentActive.type] === itemId
-      }
     },
 
     dressTextToMultiType(itemId) {
@@ -184,10 +149,9 @@ export default {
       return outputText
     },
 
-    ...mapMutations({
-      userDress: 'user/DRESS_ITEM',
-      userUndress: 'user/UNDRESS_ITEM',
-    }),
+    closeDialog() {
+      this.dialogVisible = false
+    },
   },
 }
 </script>
