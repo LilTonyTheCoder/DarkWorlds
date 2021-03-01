@@ -1,4 +1,5 @@
-# circle-of-life
+# Circle-of-life
+[Live version](http://bigtony555.ru/).
 
 ## Build Setup
 
