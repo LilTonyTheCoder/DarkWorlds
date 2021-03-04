@@ -1,5 +1,8 @@
 <template>
-  <div class="main-page personage-page">
+  <div
+    ref="main-page"
+    class="main-page personage-page"
+  >
     <div class="personage-page__wrapper">
       <UserClothesSection
         class="personage-page__inventory inventory inventory--left"
@@ -34,7 +37,9 @@
     <div class="personage-page__info info">
       <PersonageStats />
 
-      <BottomParams />
+      <BottomParams
+        @scrollToBottom="scrollToBottom"
+      />
     </div>
   </div>
 </template>
@@ -119,6 +124,15 @@ export default {
       changeHeaderTitle: 'header/CHANGE_TITLE',
       changeHeaderBottom: 'header/CHANGE_BOTTOM_SECTION',
     }),
+
+    scrollToBottom() {
+      setTimeout(() => {
+        this.$refs['main-page'].scrollTo({
+            top: 1000,
+            behavior: "smooth",
+        })
+      }, 300);
+    },
   },
 }
 </script>

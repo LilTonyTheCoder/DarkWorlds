@@ -137,10 +137,10 @@ export default {
     },
 
     props: {
-      armor_h: 1,
+      armor_head: 1,
       armor_body: 1,
-      armor_belt: 1,
-      armor_b: 1,
+      armor_waist: 1,
+      armor_legs: 1,
     },
   },
 }

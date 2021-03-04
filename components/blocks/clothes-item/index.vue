@@ -24,7 +24,7 @@
         v-for="(reqProp, reqKey, reqIndex) in item.require"
         :key="`require ${reqIndex}`"
       >
-        {{ reqKey }} : {{ reqProp }}
+        {{ paramNameByKey(reqKey) }} : {{ reqProp }}
       </div>
 
       <b>Свойства:</b>
@@ -33,7 +33,7 @@
         v-for="(propProp, propKey, propIndex) in item.props"
         :key="`property ${propIndex}`"
       >
-        {{ propKey }} : +{{ propProp }}
+        {{ paramNameByKey(propKey) }} : +{{ propProp }}
       </div>
 
       <br>
@@ -78,6 +78,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import { getNameByKey } from '~/helpers/paramsNames.js'
 
 export default {
   name: 'BlockClothesItem',
@@ -132,6 +133,10 @@ export default {
 
     throwItem(itemId) {
       this.throwItemFromInventory(itemId)
+    },
+
+    paramNameByKey(key) {
+      return getNameByKey(key)
     },
 
     ...mapMutations({

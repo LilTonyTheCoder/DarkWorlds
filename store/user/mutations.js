@@ -1,9 +1,9 @@
 export default {
   INCREASE_STAT(state, payload) {
-    if (state.stats.free.num < 1) return
+    if (state.stats.free < 1) return
 
-    state.stats[payload].num += 1
-    state.stats.free.num -= 1
+    state.stats[payload] += 1
+    state.stats.free -= 1
   },
 
   DRESS_ITEM(state, payload) {

@@ -1,6 +1,9 @@
 <template>
   <div>
-    <el-link type="warning">
+    <el-link
+      type="warning"
+      @click="undressAll"
+    >
       Снять все
     </el-link>
 
@@ -11,7 +14,7 @@
     <el-tag
       type="info"
     >
-      {{ userStats.free.title }}: {{ userStats.free.num }}
+      {{ paramNameByKey('free') }}: {{ userStats['free'] }}
     </el-tag>
 
     <br>
@@ -21,17 +24,20 @@
     </div>
 
     <div
-      v-for="(stat, key) in filteredUserStats"
-      :key="key"
+      v-for="(stat, key, index) in filteredUserStats"
+      :key="index"
       class="info__item item"
     >
       <div class="item__text">
-        {{ stat.title }}
+        {{ paramNameByKey(key) }}
       </div>
 
       <div class="item__right">
         <div class="item__num">
-          <b>{{ stat.num }}</b>
+          <b>{{ stat + allWearedModificators[key] }}</b>
+          <span v-if="allWearedModificators[key]">
+            ( {{ stat }} + {{ allWearedModificators[key] }} )
+          </span>
         </div>
 
         <div class="item__controllers controllers">
@@ -52,14 +58,21 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex'
+import { getNameByKey } from '~/helpers/paramsNames.js'
+import userItems from '~/mixins/user-items.js'
 
 export default {
   name: 'PersonageStats',
+
+  mixins: [
+    userItems,
+  ],
 
   computed: {
     ...mapState({
       userCommon: state => state.user.common,
       userStats: state => state.user.stats,
+      userEquipped: state => state.user.equipped,
     }),
 
     filteredUserStats() {
@@ -74,7 +87,18 @@ export default {
   methods: {
     ...mapMutations({
       increaseUserStat: 'user/INCREASE_STAT',
+      userUndress: 'user/UNDRESS_ITEM',
     }),
+
+    undressAll() {
+      Object.keys(this.userEquipped).forEach((key) => {
+        this.userUndress(key)
+      });
+    },
+
+    paramNameByKey(key) {
+      return getNameByKey(key)
+    },
   },
 }
 </script>
@@ -101,7 +125,9 @@ export default {
       }
 
       &__num {
-        width: 50px;
+        width: 80px;
+        text-align: right;
+        padding-right: 10px;
       }
 
       .controllers {

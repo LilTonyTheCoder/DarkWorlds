@@ -27,7 +27,7 @@ export default () => ({
 
   equipped: {
     helmet: '9d25fcc91',
-    weapon: null,
+    weapon: 'cd8c2814a',
     armor: null,
 
     earrings: null,
@@ -59,30 +59,12 @@ export default () => ({
   },
 
   stats: {
-    str: {
-      title: "Сила",
-      num: 1,
-    },
-    dex: {
-      title: "Ловкость",
-      num: 1,
-    },
-    suc: {
-      title: "Инстинкт",
-      num: 2,
-    },
-    end: {
-      title: "Жизнеспособность",
-      num: 7,
-    },
-    int: {
-      title: "Интеллект",
-      num: 0,
-    },
-    free: {
-      title: "Свободных статов",
-      num: 2,
-    },
+    str: 1,
+    dex: 1,
+    suc: 2,
+    end: 7,
+    int: 0,
+    free: 2,
   },
 
   settings: {

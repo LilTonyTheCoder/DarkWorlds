@@ -41,7 +41,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import { getItemById } from '~/backendInfo/items.js'
+import userItems from '~/mixins/user-items.js'
+import { armorNameMatch } from '~/helpers/paramsNames.js'
 
 export default {
   name: 'UserClothesSection',
@@ -49,6 +50,10 @@ export default {
   components: {
     BlockClothesItem: () => import('@/components/blocks/clothes-item'),
   },
+
+  mixins: [
+    userItems,
+  ],
 
   props: {
     clothes: {
@@ -62,24 +67,6 @@ export default {
       dialogVisible: false,
       dialogTitle: 'title',
 
-      typeToNameMatch: { // TODO - в utils это
-        helmet: 'Шлем',
-        weapon: 'Оружие',
-        armor: 'Броня',
-
-        earrings: 'Серьги',
-        necklace: 'Ожерелье',
-        gloves: 'Перчатки',
-        bracelets: 'Наручи',
-        ring: 'Кольцо',
-        shield: 'Щит',
-        boots: 'Ботинки',
-        belt: 'Пояс',
-
-        stone: 'Камень',
-        rune: 'Руна',
-      },
-
       dialogInnerItems: [],
 
       currentActive: {
@@ -90,26 +77,16 @@ export default {
   },
 
   computed: {
-    allUserItemsExpanded() {
-      const arr = []
-
-      this.userInventory.forEach(id => {
-        arr.push({
-          id,
-          ...this.getItem(id),
-        })
-      })
-
-      return arr
-    },
-
     isMultiType() {
       return this.currentActive.type !== this.currentActive.title
     },
 
+    typeToNameMatch() {
+      return armorNameMatch
+    },
+
     ...mapState({
       userEquip: state => state.user.equipped,
-      userInventory: state => state.user.inventory,
     }),
   },
 
@@ -131,10 +108,6 @@ export default {
 
       this.dialogTitle = this.typeToNameMatch[type]
       this.dialogVisible = true
-    },
-
-    getItem(id) {
-      return getItemById(id)
     },
 
     dressTextToMultiType(itemId) {

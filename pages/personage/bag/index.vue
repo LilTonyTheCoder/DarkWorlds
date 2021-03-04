@@ -5,15 +5,6 @@
 
     <br><br>
 
-    <!-- <div
-      v-for="(item,index) in allItemsArray"
-      :key="index"
-    >
-      {{ index + 1 }}
-      {{ item.info.title }}
-      <br> <br>
-    </div> -->
-
     <BlockClothesItem
       v-for="(item, index) in allItemsArray"
       :key="`dialog item ${index}`"

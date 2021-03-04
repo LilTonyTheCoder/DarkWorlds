@@ -21,7 +21,7 @@ export default {
       hp: 5,
       crit: 1,
       a_uvorot: 2,
-      armor_b: 2,
+      armor_legs: 2,
     },
   },
 
@@ -47,7 +47,7 @@ export default {
       hp: 3,
       crit: 2,
       a_crit: 1,
-      armor_b: 4,
+      armor_legs: 4,
     },
   },
 
@@ -73,7 +73,7 @@ export default {
       hp: 3,
       a_crit: 1,
       a_uvorot: 1,
-      armor_b: 5,
+      armor_legs: 5,
     },
   },
 
@@ -99,7 +99,7 @@ export default {
       hp: 2,
       crit: 3,
       uvorot: 3,
-      armor_b: 2,
+      armor_legs: 2,
     },
   },
 
@@ -125,7 +125,7 @@ export default {
       hp: 5,
       a_crit: 1,
       uvorot: 2,
-      armor_b: 3,
+      armor_legs: 3,
     },
   },
 
@@ -151,7 +151,7 @@ export default {
       hp: 3,
       uvorot: 3,
       a_uvorot: 1,
-      armor_b: 3,
+      armor_legs: 3,
     },
   },
 }

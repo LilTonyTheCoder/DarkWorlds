@@ -22,7 +22,7 @@ export default {
       a_crit: 3,
       uvorot: 3,
       a_uvorot: 3,
-      armor_armor: 2,
+      armor_body: 2,
     },
   },
 
@@ -46,7 +46,7 @@ export default {
 
     props: {
       str: 1,
-      armor_armor: 3,
+      armor_body: 3,
     },
   },
 
@@ -71,7 +71,7 @@ export default {
     props: {
       hp: 5,
       pw: 5,
-      armor_armor: 5,
+      armor_body: 5,
     },
   },
 }
