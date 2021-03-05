@@ -157,6 +157,10 @@ export default {
   &__dialog {
     width: 90%;
     line-height: 16px;
+
+    .el-dialog__body {
+      padding: 30px 10px;
+    }
   }
 }
 </style>

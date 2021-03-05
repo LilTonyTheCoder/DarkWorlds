@@ -1,4 +1,5 @@
 export const keyNameMatch = {
+  // Stats
   lvl: 'Уровень',
   str: 'Сила',
   dex: 'Ловкость',
@@ -7,6 +8,7 @@ export const keyNameMatch = {
   int: 'Интеллект',
   free: 'Свободных статов',
 
+  // Modificators
   hp: 'Уровень жизни',
   pw: 'Уровень выносливости',
   crit: 'Критический удар',
@@ -21,7 +23,9 @@ export const keyNameMatch = {
   armor_waist: 'Броня пояса',
   armor_legs: 'Броня ног',
 
-  maxWear: '', // TODO
+  // Other
+  maxWear: 'МАКС можно надеть таких предметов', // for stones
+  use_chance: 'Вероятность срабатывания', // for runes
 }
 
 export const armorNameMatch = {
@@ -42,6 +46,23 @@ export const armorNameMatch = {
   rune: 'Руна',
 }
 
+const actionNameMatch = {
+  hpHeal: 'Восстанавливает уровень жизни на',
+  pwHeal: 'Восстанавливает уровень выносливости на',
+}
+
 export const getNameByKey = (key) => {
   return keyNameMatch[key] ? keyNameMatch[key] : key
+}
+
+export const getActionDescription = (actionObj) => {
+  switch (actionObj.name) {
+    case 'hpHeal':
+      return `${actionNameMatch.hpHeal} ${actionObj.val}`
+
+    case 'pwHeal':
+      return `${actionNameMatch.pwHeal} ${actionObj.val}`
+  }
+
+  return 'default description for rune'
 }

@@ -27,7 +27,9 @@ export const usersItems = {
   '3f3605816': { prototype: 10000, durability: 9 },
   'cd8c2814a': { prototype: 11000, durability: 9 },
   '649aaf74f': { prototype: 12000, durability: 9 },
-  '48e7afd73': { prototype: 13000, durability: 9 },
+  '48e7afd73': { prototype: 13000, durability: 2 },
+  '741ea426e': { prototype: 13001, durability: 2 },
+  'f553bdb9b': { prototype: 13002, durability: 2 },
 
 }
 

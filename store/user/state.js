@@ -23,6 +23,8 @@ export default () => ({
     'cd8c2814a',
     '649aaf74f',
     '48e7afd73',
+    '741ea426e',
+    'f553bdb9b',
   ],
 
   equipped: {

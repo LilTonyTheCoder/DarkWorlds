@@ -23,6 +23,7 @@
       <div
         v-for="(reqProp, reqKey, reqIndex) in item.require"
         :key="`require ${reqIndex}`"
+        class="clothes-item__item"
       >
         {{ paramNameByKey(reqKey) }} : {{ reqProp }}
       </div>
@@ -32,9 +33,26 @@
       <div
         v-for="(propProp, propKey, propIndex) in item.props"
         :key="`property ${propIndex}`"
+        class="clothes-item__item"
       >
         {{ paramNameByKey(propKey) }} : +{{ propProp }}
       </div>
+
+      <div
+        v-if="item.action && item.action.use_chance"
+        class="clothes-item__item"
+      >
+        {{ paramNameByKey('use_chance') }} : {{ item.action.use_chance }}%
+      </div>
+
+      <template v-if="item.action">
+        <b>Действие:</b>
+        <br>
+
+        <div class="clothes-item__item">
+          {{ actionDescriptionByObj(item.action) }}
+        </div>
+      </template>
 
       <br>
 
@@ -78,7 +96,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
-import { getNameByKey } from '~/helpers/paramsNames.js'
+import { getNameByKey, getActionDescription } from '~/helpers/paramsNames.js'
 
 export default {
   name: 'BlockClothesItem',
@@ -139,6 +157,10 @@ export default {
       return getNameByKey(key)
     },
 
+    actionDescriptionByObj(actionObj) {
+      return getActionDescription(actionObj)
+    },
+
     ...mapMutations({
       userDress: 'user/DRESS_ITEM',
       userUndress: 'user/UNDRESS_ITEM',
@@ -163,6 +185,11 @@ export default {
 
   &__right {
     width: calc(100% - 90px);
+  }
+
+  &__item {
+    font-size: 12px;
+    word-break: initial;
   }
 }
 </style>
