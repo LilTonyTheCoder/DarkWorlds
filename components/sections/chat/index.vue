@@ -5,7 +5,7 @@
     <div>19:24 <b>bender:</b> кстати, я офф</div>
 
     <div class="main-chat__release">
-      v 0.001
+      v 0.002
     </div>
   </div>
 </template>
