@@ -6,9 +6,10 @@
       </div>
 
       <el-button
-        v-for="(route, index) in routes"
+        v-for="(route, index) in routesArray"
         :key="index"
         class="routes__line line"
+        @click="handleMove(route.name)"
       >
         <div class="line__inner">
           <div class="line__name">
@@ -35,16 +36,60 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex'
+
 export default {
   name: 'RoutesMainPage',
 
+  props: {
+    mapArray: {
+      type: Array,
+      default: () => [],
+    },
+  },
+
   data() {
-    return {
-      routes: [
-        { name: 'Переход к змеиной поляне', time: 7, isActive: false },
-        { name: 'Вход в паучье гнездо', time: 7 },
-      ],
-    }
+    return {}
+  },
+
+  computed: {
+    possibleMoves() {
+      const currentAreaObj = this.mapArray[this.userPosition.y][this.userPosition.x]
+
+      return currentAreaObj.possibleMoves ? currentAreaObj.possibleMoves : ['t', 'l', 'r', 'b']
+    },
+
+    routesArray() {
+      let outputArray = []
+
+      if (this.possibleMoves.includes('t')) outputArray.push({ name: '↑' })
+      if (this.possibleMoves.includes('l')) outputArray.push({ name: '←' })
+      if (this.possibleMoves.includes('r')) outputArray.push({ name: '→' })
+      if (this.possibleMoves.includes('b')) outputArray.push({ name: '↓' })
+
+      outputArray = outputArray.map(el => {
+        return {
+          ...el,
+          time: 7,
+        }
+      })
+
+      return outputArray
+    },
+
+    ...mapState({
+      userPosition: state => state.user.position,
+    }),
+  },
+
+  methods: {
+    handleMove(direction) {
+      this.userMapMove(direction)
+    },
+
+    ...mapMutations({
+      userMapMove: 'user/MAP_MOVE',
+    }),
   },
 }
 </script>

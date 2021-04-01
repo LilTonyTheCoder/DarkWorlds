@@ -69,6 +69,11 @@ export default () => ({
     free: 2,
   },
 
+  position: {
+    x: 5,
+    y: 5,
+  },
+
   settings: {
     gender: 'male', // male / female
     availableAvatars: [

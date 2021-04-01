@@ -21,4 +21,21 @@ export default {
   THROW_ITEM_FROM_INVENTORY(state, payload) {
     state.inventory = state.inventory.filter(el => el !== payload )
   },
+
+  MAP_MOVE(state, payload) {
+    switch (payload) {
+      case '↑':
+        state.position.y -= 1
+        break
+      case '←':
+        state.position.x -= 1
+        break
+      case '→':
+        state.position.x += 1
+        break
+      case '↓':
+        state.position.y += 1
+        break
+    }
+  },
 }
