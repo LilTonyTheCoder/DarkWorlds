@@ -6,8 +6,8 @@
           class="info__map-inner"
           :style="[
             {height: `${(mapArray.length+1) * blockParams.height}px`},
-            {marginTop: `${(userPosition.y-5) * -30 - 10}px`},
-            {marginLeft: `${(userPosition.x-5.5) * -30 - 15}px`}
+            {marginTop: `${(userPosition.y - mapArray.length/2) * -blockParams.height - 10}px`},
+            {marginLeft: `${(userPosition.x - mapArray[0].length/2) * -blockParams.width - blockParams.width/2}px`}
           ]"
         >
           <div
@@ -102,8 +102,8 @@ export default {
   data() {
     return {
       blockParams: {
-        width: 30,
-        height: 30,
+        width: 30, // (*1)
+        height: 30, // (*1)
       },
 
       areaIconMatch: {
@@ -142,13 +142,18 @@ export default {
 </script>
 
 <style lang="scss">
+/**
+  (80 / 100) / 3 = 2.6667
+  30px (*1) - depends on blockParams.width
+ */
+$border-param: 30px * 0.26667;
+
 .main-page {
   &__wrapper {
     .info {
       margin-bottom: 20px;
 
       .el-card__body {
-        // padding: 12px 14px;
         padding: 0;
       }
 
@@ -175,10 +180,9 @@ export default {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        // width: 300px; // 30px
         background: rgb(193, 188, 173);
         padding: 10px;
-        height: 300px; // 30px
+        height: 300px;
       }
 
       &__row {
@@ -203,17 +207,17 @@ export default {
         }
 
         &__icon {
-          width: 15px;
-          height: 15px;
+          width: 50%;
+          height: 50%;
         }
 
         &__border {
           position: absolute;
-          width: calc(100% - 6px);
-          height: calc(100% - 6px);
+          width: 80%;
+          height: 80%;
           border: 1px solid #000;
-          top: 3px;
-          left: 3px;
+          top: 10%;
+          left: 10%;
           border-radius: 5px;
         }
 
@@ -222,10 +226,10 @@ export default {
           position: absolute;
 
           &--b {
-            width: calc(100% - 6px - 14px);
+            left: 33%;
+            width: 33%;
             height: 2px;
-            left: calc(3px + 7px);
-            bottom: 3px;
+            bottom: 10%;
 
             &::before {
               content: "";
@@ -233,7 +237,7 @@ export default {
               left: 0;
               top: 1px;
               width: 1px;
-              height: 8px;
+              height: $border-param;
               background: #000;
             }
 
@@ -243,51 +247,32 @@ export default {
               right: 0;
               top: 1px;
               width: 1px;
-              height: 8px;
+              height: $border-param;
               background: #000;
             }
           }
 
           &--t {
-            width: calc(100% - 6px - 14px);
+            width: 33%;
+            left: 33%;
             height: 2px;
-            left: calc(3px + 7px);
-            top: 3px;
-
-            &::before {
-              content: "";
-              position: absolute;
-              left: 0;
-              top: -7px;
-              width: 1px;
-              height: 8px;
-              background: #000;
-            }
-
-            &::after {
-              content: "";
-              position: absolute;
-              right: 0;
-              top: -7px;
-              width: 1px;
-              height: 8px;
-              background: #000;
-            }
+            top: 10%;
           }
 
           &--l {
-            height: calc(100% - 6px - 14px);
-            width: 2px;
-            top: calc(3px + 7px);
             left: 3px;
+            height: 33%;
+            top: 33%;
+            left: 10%;
+            width: 2px;
 
             &::before {
               content: "";
               position: absolute;
               top: 0;
-              left: -7px;
+              left: 1 - $border-param;
               height: 1px;
-              width: 8px;
+              width: $border-param;
               background: #000;
             }
 
@@ -295,38 +280,18 @@ export default {
               content: "";
               position: absolute;
               bottom: 0;
-              left: -7px;
+              left: 1 - $border-param;
               height: 1px;
-              width: 8px;
+              width: $border-param;
               background: #000;
             }
           }
 
           &--r {
-            height: calc(100% - 6px - 14px);
+            height: 33%;
+            top: 33%;
+            right: 10%;
             width: 2px;
-            top: calc(3px + 7px);
-            right: 3px;
-
-             &::before {
-              content: "";
-              position: absolute;
-              top: 0;
-              right: -7px;
-              height: 1px;
-              width: 8px;
-              background: #000;
-            }
-
-            &::after {
-              content: "";
-              position: absolute;
-              bottom: 0;
-              right: -7px;
-              height: 1px;
-              width: 8px;
-              background: #000;
-            }
           }
         }
       }

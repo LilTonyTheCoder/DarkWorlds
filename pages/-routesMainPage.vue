@@ -5,7 +5,19 @@
         Переходы
       </div>
 
-      <el-button
+      <div class="routes__controllers">
+        <el-button
+          v-for="(route, index) in routesArray"
+          :key="index"
+          class="routes__line line"
+          :disabled="!route.canMove"
+          @click="handleMove(route.name)"
+        >
+          {{ route.name }}
+        </el-button>
+      </div>
+
+      <!-- <el-button
         v-for="(route, index) in routesArray"
         :key="index"
         class="routes__line line"
@@ -30,7 +42,7 @@
             status="warning"
           />
         </div>
-      </el-button>
+      </el-button> -->
     </div>
   </div>
 </template>
@@ -60,19 +72,17 @@ export default {
     },
 
     routesArray() {
-      let outputArray = []
+      let outputArray = [
+        { name: '↑', canMove: false },
+        { name: '←', canMove: false },
+        { name: '↓', canMove: false },
+        { name: '→', canMove: false },
+      ]
 
-      if (this.possibleMoves.includes('t')) outputArray.push({ name: '↑' })
-      if (this.possibleMoves.includes('l')) outputArray.push({ name: '←' })
-      if (this.possibleMoves.includes('r')) outputArray.push({ name: '→' })
-      if (this.possibleMoves.includes('b')) outputArray.push({ name: '↓' })
-
-      outputArray = outputArray.map(el => {
-        return {
-          ...el,
-          time: 7,
-        }
-      })
+      if (this.possibleMoves.includes('t')) outputArray[0].canMove = true
+      if (this.possibleMoves.includes('l')) outputArray[1].canMove = true
+      if (this.possibleMoves.includes('b')) outputArray[2].canMove = true
+      if (this.possibleMoves.includes('r')) outputArray[3].canMove = true
 
       return outputArray
     },
@@ -82,9 +92,27 @@ export default {
     }),
   },
 
+  mounted() {
+    document.addEventListener("keyup", this.setKeyPressToMove)
+  },
+
+  beforeDestroy() {
+    document.removeEventListener("keyup", this.setKeyPressToMove)
+  },
+
   methods: {
     handleMove(direction) {
+      const canMove = this.routesArray.find(el => el.name === direction).canMove
+
+      if (!canMove) return
       this.userMapMove(direction)
+    },
+
+    setKeyPressToMove(event) {
+      if (event.keyCode === 37 || event.keyCode === 65) this.handleMove('←')
+      if (event.keyCode === 38 || event.keyCode === 87) this.handleMove('↑')
+      if (event.keyCode === 39 || event.keyCode === 68) this.handleMove('→')
+      if (event.keyCode === 40 || event.keyCode === 83) this.handleMove('↓')
     },
 
     ...mapMutations({
@@ -106,8 +134,18 @@ export default {
       margin-bottom: 10px;
     }
 
+    &__controllers {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      .routes__line:first-child {
+        width: 100%;
+      }
+    }
+
     .line {
-      width: 100%;
+      // width: 100%;
       height: 50px;
 
       .el-progress-bar {
