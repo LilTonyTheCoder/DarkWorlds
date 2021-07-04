@@ -74,14 +74,14 @@ export default {
     routesArray() {
       let outputArray = [
         { name: '↑', canMove: false },
-        { name: '←', canMove: false },
         { name: '↓', canMove: false },
+        { name: '←', canMove: false },
         { name: '→', canMove: false },
       ]
 
       if (this.possibleMoves.includes('t')) outputArray[0].canMove = true
-      if (this.possibleMoves.includes('l')) outputArray[1].canMove = true
-      if (this.possibleMoves.includes('b')) outputArray[2].canMove = true
+      if (this.possibleMoves.includes('b')) outputArray[1].canMove = true
+      if (this.possibleMoves.includes('l')) outputArray[2].canMove = true
       if (this.possibleMoves.includes('r')) outputArray[3].canMove = true
 
       return outputArray
@@ -104,7 +104,16 @@ export default {
     handleMove(direction) {
       const canMove = this.routesArray.find(el => el.name === direction).canMove
 
-      if (!canMove) return
+      if (!canMove) {
+        this.$message({
+          message: 'Нельзя идти в этом направлении.',
+          type: 'warning',
+          showClose: true,
+        })
+
+        return
+      }
+
       this.userMapMove(direction)
     },
 
@@ -139,9 +148,6 @@ export default {
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
-      .routes__line:first-child {
-        width: 100%;
-      }
     }
 
     .line {

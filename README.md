@@ -1,4 +1,4 @@
-# Circle-of-life
+# DarkWorlds
 [Live version](http://bigtony555.ru/).
 
 ## Build Setup

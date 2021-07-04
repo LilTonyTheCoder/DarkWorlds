@@ -3,6 +3,14 @@
     <el-card class="main-page__info info">
       <div class="info__map-wrapper">
         <div
+          :style="{
+            width: `${blockParams.width * 0.7}px`,
+            height: `${blockParams.height * 0.7}px`,
+          }"
+          class="block__current-position"
+        />
+
+        <div
           class="info__map-inner"
           :style="[
             {height: `${(mapArray.length+1) * blockParams.height}px`},
@@ -29,11 +37,6 @@
                 <div
                   :data-area-name="block.area"
                   class="block__border"
-                />
-
-                <div
-                  v-if="userPosition.x === blockIndex && userPosition.y === rowIndex"
-                  class="block__current-position"
                 />
 
                 <img
@@ -183,6 +186,7 @@ $border-param: 30px * 0.26667;
         background: rgb(193, 188, 173);
         padding: 10px;
         height: 300px;
+        transition: .3s;
       }
 
       &__row {
@@ -198,12 +202,13 @@ $border-param: 30px * 0.26667;
         &__current-position {
           border-radius: 50%;
           background: rgba(255,255,255, .5);
-          width: 70%;
-          height: 70%;
+          // width: 70%;
+          // height: 70%;
           position: absolute;
-          top: 15%;
-          left: 15%;
+          top: 50%;
+          left: 50%;
           z-index: 10;
+          transform: translate(-50%, -50%);
         }
 
         &__icon {

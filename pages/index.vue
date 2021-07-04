@@ -18,7 +18,7 @@ export default {
   components: {
     BottomExpanders: () => import('./-bottomExpanders'),
     RoutesMainPage: () => import('./-routesMainPage'),
-    Map: () => import('~/components/sections/map'),
+    Map: () => import('./-map'),
   },
 
   data() {
@@ -29,7 +29,7 @@ export default {
 
   created() {
     this.changeHeaderAction('openLeftMenu')
-    this.changeHeaderTitle('CircleOfLife')
+    this.changeHeaderTitle('DarkWorlds')
     this.changeHeaderBottom('default')
   },
 
