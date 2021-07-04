@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 import { mapArray } from '~/backendInfo/map.js'
 
 export default {
@@ -27,9 +27,16 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState({
+      headerTitle: state => state.header.title,
+    }),
+  },
+
+
   created() {
     this.changeHeaderAction('openLeftMenu')
-    this.changeHeaderTitle('DarkWorlds')
+    this.changeHeaderTitle(this.headerTitle)
     this.changeHeaderBottom('default')
   },
 

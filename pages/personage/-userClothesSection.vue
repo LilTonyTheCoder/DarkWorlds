@@ -95,7 +95,18 @@ export default {
       this.currentActive.type = type
       this.currentActive.title = title
 
+      // Hide other types
       this.dialogInnerItems = this.allUserItemsExpanded.filter(el => el.type === type)
+
+      // Hide current type which is already weared
+      this.dialogInnerItems = this.dialogInnerItems.filter(el => {
+        const isElWear = Object.values(this.userEquip).includes(el.id)
+        const isElWearToCurrentTitle = this.userEquip[title] === el.id
+
+        if (isElWear && !isElWearToCurrentTitle) return false
+
+        return true
+      })
 
       this.dialogInnerItems = this.dialogInnerItems.map((item) => {
         const equippedIn = (this.userEquip[this.currentActive.title] === item.id) ? this.currentActive.title : null
